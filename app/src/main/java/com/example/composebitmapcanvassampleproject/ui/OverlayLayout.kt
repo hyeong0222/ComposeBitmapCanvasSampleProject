@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -23,12 +22,13 @@ fun OverlayLayout(sampleList: List<Sample>) {
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
 
-    val screenWidth = configuration.screenWidthDp
-    val screenHeight = configuration.screenHeightDp
+    val canvasHeight = configuration.screenWidthDp
+    val canvasWidth = canvasHeight * 16 / 9
 
-    Box(modifier = Modifier
+    Box(
+        modifier = Modifier
         .aspectRatio(16 / 9f)
-        .background(Color.Red)
+        .background(Color.White)
     ) {
         sampleList.forEach { sample ->
             val imagePainter = rememberAsyncImagePainter(
@@ -38,14 +38,16 @@ fun OverlayLayout(sampleList: List<Sample>) {
                 }.build()
             )
 
-            val width = screenWidth * sample.scaleX
-            val height = screenHeight * sample.scaleY
+            val imageWidth = canvasWidth * sample.scaleX
+            val imageHeight = canvasHeight * sample.scaleY
 
-            val positionX = screenWidth * sample.positionX
-            val positionY = screenHeight * sample.positionY
+            val positionX = canvasWidth * sample.positionX
+            val positionY = canvasHeight * sample.positionY
 
             Image(
-                modifier = Modifier.size(width = width.dp, height = height.dp).offset(x = positionX.dp, y = positionY.dp),
+                modifier = Modifier
+                    .size(width = imageWidth.dp, height = imageHeight.dp)
+                    .offset(x = positionX.dp, y = positionY.dp),
                 painter = imagePainter,
                 contentDescription = ""
             )

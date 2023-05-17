@@ -3,11 +3,8 @@ package com.example.composebitmapcanvassampleproject.viewmodel
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -32,18 +29,18 @@ class MainViewModel @Inject constructor(
             Sample(
                 type = "IMAGE",
                 value = "https://avatars3.githubusercontent.com/u/35650605?s=400&u=058086fd5c263f50f2fbe98ed24b5fbb7d437a4e&v=4",
-                scaleX = 0.2f,
-                scaleY = 0.2f,
-                positionX = 0.24f,
-                positionY = 0.3f,
+                scaleX = 0.03f,
+                scaleY = 0.01f,
+                positionX = 0f,
+                positionY = 0f,
                 sort = 0
             ),
             Sample(
                 type = "IMAGE",
                 value = "https://avatars3.githubusercontent.com/u/35650605?s=400&u=058086fd5c263f50f2fbe98ed24b5fbb7d437a4e&v=4",
-                scaleX = 0.3f,
-                scaleY = 0.3f,
-                positionX = 0.6f,
+                scaleX = 0.1f,
+                scaleY = 0.1f,
+                positionX = 0.2f,
                 positionY = 0.2f,
                 sort = 0
             ),
