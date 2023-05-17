@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -22,37 +23,24 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.composebitmapcanvassampleproject.model.Sample
 import com.example.composebitmapcanvassampleproject.ui.CanvasDraw
 import com.example.composebitmapcanvassampleproject.ui.CaptureBitmap
+import com.example.composebitmapcanvassampleproject.ui.OverlayLayout
 import com.example.composebitmapcanvassampleproject.ui.theme.ComposeBitmapCanvasSampleProjectTheme
+import com.example.composebitmapcanvassampleproject.viewmodel.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    
-    val sampleList: List<Sample> = listOf(
-        Sample(
-            type = "IMAGE",
-            value = "https://avatars3.githubusercontent.com/u/35650605?s=400&u=058086fd5c263f50f2fbe98ed24b5fbb7d437a4e&v=4",
-            scaleX = 0.0f,
-            scaleY = 0.0f,
-            positionX = 0.24f,
-            positionY = 0.3f,
-            sort = 0
-        ),
-        Sample(
-            type = "IMAGE",
-            value = "https://avatars3.githubusercontent.com/u/35650605?s=400&u=058086fd5c263f50f2fbe98ed24b5fbb7d437a4e&v=4",
-            scaleX = 0.0f,
-            scaleY = 0.0f,
-            positionX = 0.6f,
-            positionY = 0.2f,
-            sort = 0
-        ),
-    ) 
+
+    private val viewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeBitmapCanvasSampleProjectTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier, color = MaterialTheme.colorScheme.background) {
-                    CanvasDraw()
+                    OverlayLayout(sampleList = viewModel.sampleList)
+//                    CanvasDraw()
 //                    CaptureBitmap {
 ////                        val textMeasurer = rememberTextMeasurer()
 ////                        Canvas(
