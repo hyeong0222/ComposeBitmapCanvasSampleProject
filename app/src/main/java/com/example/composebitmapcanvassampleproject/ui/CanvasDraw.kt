@@ -3,7 +3,9 @@ package com.example.composebitmapcanvassampleproject.ui
 import android.graphics.Bitmap
 import android.util.Log
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -34,36 +36,36 @@ fun CanvasDraw(
     val canvasHeight = configuration.screenWidthDp - 50
     val canvasWidth = ((canvasHeight * 16) / 9)
 
-    val bitmapList by viewModel.bitmapList.collectAsState()
+//    val bitmapList by viewModel.bitmapList.collectAsState()
+    val bitmap by viewModel.bitmap.collectAsState(initial = null)
 
-    Canvas(
-        modifier = Modifier
-            .size(width = canvasWidth.dp, height = canvasHeight.dp)
-            .background(Color.Red)
-    ) {
-//        val image = ImageBitmap(500, 250).
-//        val bitmap = Bitmap.createBitmap(500, 250, Bitmap.Config.ARGB_8888)
-//        val option = BitmapFactory.Options()
-//        option.inPreferredConfig = Bitmap.Config.ARGB_8888
-//        val bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.youtube, option).asImageBitmap()
-//
-//        drawImage(bitmap, topLeft = Offset(500f, 300f))
-
-        if (bitmapList.isNotEmpty()) {
-            bitmapList.forEachIndexed { index, bitmap ->
-                val sample = viewModel.sampleList[index]
-                with(density) {
-                    val bitmapWidth = (sample.scaleX * canvasWidth).dp.roundToPx()
-                    val bitmapHeight = (sample.scaleY * canvasHeight).dp.roundToPx()
-                    val resizedBitmap = Bitmap.createScaledBitmap(
-                        bitmap, bitmapWidth, bitmapHeight,false
-                    ).asImageBitmap()
-
-                    val offsetX = canvasWidth.dp.roundToPx() * sample.positionX
-                    val offsetY = canvasHeight.dp.roundToPx() * sample.positionY
-                    drawImage(image = resizedBitmap, topLeft = Offset(offsetX, offsetY))
-                }
-            }
-        }
+    bitmap?.let {
+        Image(
+            modifier = Modifier.background(Color.Red),
+            bitmap = it.asImageBitmap(),
+            contentDescription = "",
+        )
     }
+//    Canvas(
+//        modifier = Modifier
+//            .size(width = canvasWidth.dp, height = canvasHeight.dp)
+//            .border(2.dp, Color.Black)
+//    ) {
+//        if (bitmapList.isNotEmpty()) {
+//            bitmapList.forEachIndexed { index, bitmap ->
+//                val sample = viewModel.sampleList[index]
+//                with(density) {
+//                    val bitmapWidth = (sample.scaleX * canvasWidth).dp.roundToPx()
+//                    val bitmapHeight = (sample.scaleY * canvasHeight).dp.roundToPx()
+//                    val resizedBitmap = Bitmap.createScaledBitmap(
+//                        bitmap, bitmapWidth, bitmapHeight,false
+//                    ).asImageBitmap()
+//
+//                    val offsetX = canvasWidth.dp.roundToPx() * sample.positionX
+//                    val offsetY = canvasHeight.dp.roundToPx() * sample.positionY
+//                    drawImage(image = resizedBitmap, topLeft = Offset(offsetX, offsetY))
+//                }
+//            }
+//        }
+//    }
 }

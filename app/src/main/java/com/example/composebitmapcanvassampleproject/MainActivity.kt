@@ -1,12 +1,8 @@
-@file:OptIn(ExperimentalTextApi::class)
-
 package com.example.composebitmapcanvassampleproject
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -31,16 +27,14 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val viewModel: MainViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeBitmapCanvasSampleProjectTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier, color = MaterialTheme.colorScheme.background) {
-                    OverlayLayout(sampleList = viewModel.sampleList)
-//                    CanvasDraw()
+//                    OverlayLayout(sampleList = viewModel.sampleList)
+                    CanvasDraw()
 //                    CaptureBitmap {
 ////                        val textMeasurer = rememberTextMeasurer()
 ////                        Canvas(
